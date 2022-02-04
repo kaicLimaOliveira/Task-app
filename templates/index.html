@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+{% block content %}
+<div class="menu">
+    <h1 class="title">Task App</h1>
+    <ul class="links-menu">
+        <li>
+            <a href="{{url_for('pages.index')}}">Home</a>
+        </li>
+        |
+        <li>
+            <a href="{{url_for('pages.imports')}}">Imports</a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="main-content">
+        <form id="form">
+            <p>Digite seu formato de texto: </p>
+            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+            <div id="btn-action">
+                <button id="btn-reset" type="reset" class="btn">
+                    Limpar
+                </button>
+                <button id="btn-submit" type="button" class="btn">
+                    Enviar
+                </button>
+            </div>
+            <div>
+                <p>Crie uma nova variável:</p>
+                <span class="format">#</span>
+                <input id="new-name-variable" class="input-new-variable" placeholder=" Variável" type="text"
+                    maxlength="20">
+                <input id="new-value-variable" class="input-new-variable" placeholder=" Valor" type="text"
+                    maxlength="15">
+                <select class="input-new-variable" name="selectUsers" id="selectUsers">
+                    <option class="value" value="none">Nenhum usuario selecionado |</option>
+                    <option class="value" value="0">Primeiro usuário </option>
+                    <option class="value" value="1">Segundo usuário</option>
+                    <option class="value" value="2">Terceiro usuário</option>
+                    <option class="value" value="3">Quarto usuário</option>
+                    <option class="value" value="4">Quinto usuário</option>
+                </select>
+                <button id="create-variable" type="button" class="btn">Criar</button>
+            </div>
+        </form>
+
+        <h3>Variaveis Ambiente</h3>
+        <div id="aviso"></div>
+        <div id="new-var" class="variable">
+            <a class="copy-link">#id</a>
+            <a class="copy-link">#nome</a>
+            <a class="copy-link">#cpf</a>
+            <a class="copy-link">#valor_debito</a>
+            <a class="copy-link">#produto</a>
+            <a class="copy-link">#dias_atraso</a>
+            <a class="copy-link">#desconto</a>
+
+
+
+        </div>
+    </div>
+
+    <div class="aside-content">
+        <span>Bloco de notas:</span>
+        <aside id="aside-text">
+        </aside>
+    </div>
+</div>
+
+{% endblock %}
+
+
+<!-- O 1 trabalho de vocês será criar uma página simples, com um textarea para digitar um texto livre e um botão.
+    Vocês digitarão um texto qualquer nesse textarea, como se estivessem falando com um cliente. Para a comunicação ficar dinâmica, 
+    durante o texto, vocês criarão variáveis de comunicação globais. Exemplo: Serão 5 clientes. Quando você digitar "Olá #nome!", o texto
+    será trocado de acordo com cada cliente, ficando: "Olá Arthur!", "Olá Vitor!", "Olá Gustavo!", etc. Os dados com as informações dos
+    clientes está em um json que está aqui no projeto, chamado dados.json. Para utilá-los, apenas copiem o conteúdo do json e aloquem 
+    em uma variável no javascript.
+    Ao apertar o botão, o texto que vocês digitaram no textarea
+    deve aparecer em outro lugar da tela, com as informações das variáveis já trocadas de acordo com cada cliente.
+    
+    Todas as variáveis precisam ser utilizadas no texto. Para identificar uma variável, vocês devem usar a "#" ao começo dela. Exemplo:
+    #nome, #cor_do_cabelo, #cpf, etc.
+
+    Usem a criatividade de vocês. Vocês tem a liberdade de aperfeiçoar o exercício da maneira que quiserem, desde que cumpram o
+    estabelecido. Fora isso, façam o melhor para deixar a página mais funcional possível. Não precisa ser a página mais linda de todas,
+    com header, menus, e muitas coisas. É apenas uma página simples, porém elegante, com espaçamentos e alinhamentos corretos.
+
+    Se houver alguma dúvida técnica, pesquisem no Google antes de perguntar :) -->

@@ -1,0 +1,159 @@
+* {
+    text-decoration: none;
+    margin: 0;
+    list-style: none;
+}
+
+p {
+    font: 16px;
+    padding-bottom: 20px;
+}
+
+h3 {
+    font: 16px Arial;
+    font-weight: 600;
+}
+
+#btn-action {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#text {
+    width: 350px;
+    height: 300px;
+    border-radius: 4px;
+    padding: 7px;
+    max-width: 400px;
+    max-height: 350px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+    padding: 15px 50px;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.link-page {
+    color: #000;
+    margin-top: 100px;
+    padding-top: 100px;
+}
+
+.copy-link {
+    padding: 10px;
+}
+
+.copy-link:hover {
+    color: #8f8f8f;
+    cursor: pointer;
+}
+
+.variable {
+    display: flex;
+    font: 14px;
+    flex-wrap: wrap;
+}
+
+.format {
+    background-color: #e0e0e0;
+    padding: 3px 8px;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+
+.aviso {
+    width: 280px;
+    font: 14px Helvetica;
+    color: #8f8f8f;
+    border: 2px solid #f2f2f2;
+    border-radius: 4px;
+    padding: 8px;
+    bottom: 40px;
+
+    animation-name: ban-aviso;
+    animation-fill-mode: backwards;
+}
+
+@keyframes ban-aviso {
+    from {
+        opacity: 0.2;
+        left: 0%;
+    }
+    to {
+        opacity: 1;
+        left: 2%;
+    }
+}
+
+.input-new-variable {
+    padding: 4px;
+    border-radius: 3px;
+    border: 1px solid #969696;
+    margin: 2px;
+    display: inline-block;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+}
+
+.main-content {
+    flex-grow: 1;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.aside-content {
+    flex-grow: 1;
+    max-width: 550px;
+    padding: 0 20px;
+}
+
+aside {
+    margin-top: 10px;
+    border: 3.5px solid #f2f2f2;
+    border-radius: 35px;
+    height: 560px;
+    width: 100%;
+    background-color: #fffded;
+    padding: 10px;
+}
+
+.menu {
+    display: flex;
+    font: 24px "Dongle";
+    background-color: #209cee;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.menu .links-menu {
+    padding: 15px;
+    line-height: 3;
+    margin-right: 50px;
+}
+
+.menu .links-menu li {
+    display: inline;
+    padding: 15px 30px;
+}
+
+.menu .links-menu li:hover {
+    opacity: 0.6;
+    background-color: #1b7ebf;
+}
+
+.links-menu li a {
+    padding: 30px;
+    color: #000;
+}

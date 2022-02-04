@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/errors.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-errors">
+    <div class="explication-of-error">
+        <!-- <p class="text-paragraph">
+            Nosso padrão é o seguinte:
+        </p>
+
+        <ul class="list-format">
+            <li class="topics">Nome completo/</li>
+            <li class="topics">Chave de acesso/</li>
+            <li class="topics">Contrato/</li>
+            <li class="topics">Valor de entrada/</li>
+            <li class="topics">Data de entrada/</li>
+            <li class="topics">Quantidade/</li>
+            <li class="topics">Vencimento/</li>
+            <li class="topics">Valor das parcelas/</li>
+            <li class="topics">Data de expiração</li>
+        </ul> -->
+    </div>
+    <aside class="information-error">
+        <div class="title-information-error">
+            <span class="text-span">
+                Explicação dos erros
+            </span>
+            <p class="text-paragraph">
+                Você importou um arquivo CSV <br />
+                fora do padrão solicitado <br />
+            </p>
+        </div>
+
+        <section class="description-section">
+            <h3 align="center">
+                Os erros são identificados <br />
+                da seguinte forma:
+            </h3>
+
+        </section>
+    </aside>
+</div>
+{% endblock %}

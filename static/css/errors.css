@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400&display=swap");
+
+* {
+    margin: 0;
+}
+
+.content-errors {
+    display: flex;
+    height: 100vh;
+}
+
+.explication-of-error {
+    flex-grow: 2;
+}
+
+/* Aside container */
+.information-error {
+    background-color: #209cee;
+    flex-grow: 1;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 35%;
+}
+
+.title-information-error {
+    margin: 40px 0 0 0;
+    color: #fff;
+}
+
+.text-span {
+    font: "Dongle";
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.text-paragraph {
+    font-family: "Dongle";
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+}
+
+.description-section {
+    color: #fff;
+}
+
+.list-format {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.topics {
+    padding: 5px;
+}

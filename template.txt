@@ -1,0 +1,11 @@
+Olá #nome seja bem vindo! o que achou do seu #produto? Viemos aqui lembrar do #desconto reais que temos para o Senhor, caso as parcelas sejam pagas até o dia #id com no máximo de #dias_atraso dias de atraso no valor de #valor_debito! Lembrando que esse desconto é apenas para valores no débito
+
+Olá #noME seja bem vindo! o que achou do seu #Produto? Viemos aqui lembrar do #descoNTO reais que temos para o Senhor, caso as parcelas sejam pagas até o dia #ID com no máximo de #dias_atrASO dias de atraso no valor de #valOR_debito! Lembrando que esse desconto é apenas para valores no débito
+
+#ID #Nome #Cpf #Valor_Debito #DIAS_atraso #PRODUto #DEsconTO #id
+
+#nome #Nome #NOMe #NOME #nome 
+
+access_key/link(contracts)/se deu erro ou não - 1 pra cada usuario
+
+

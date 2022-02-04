@@ -1,0 +1,45 @@
+{
+    "clientes": [
+        {
+            "id": "1",
+            "nome": "João Luiz",
+            "cpf": "567.234.789-43",
+            "valor_debito": 1000.00,
+            "dias_atraso": 678,
+            "produto": "Cartão Renner SS",
+            "desconto": 50
+        },{
+            "id": "2",
+            "nome": "Vitor Zambon",
+            "cpf": "645.234.009-41",
+            "valor_debito": 5000.00,
+            "dias_atraso": 878,
+            "produto": "Cartão Americanas SS",
+            "desconto": 60
+        },{
+            "id": "3",
+            "nome": "Arthur Trevisan",
+            "cpf": "889.034.900-22",
+            "valor_debito": 4000.00,
+            "dias_atraso": 128,
+            "produto": "Cartão Itaú SS",
+            "desconto": 30
+        },{
+            "id": "4",
+            "nome": "Ravi Sachs",
+            "cpf": "875.223.777-13",
+            "valor_debito": 3000.00,
+            "dias_atraso": 508,
+            "produto": "Cartão Bradesco SS",
+            "desconto": 80
+        },{
+            "id": "5",
+            "nome": "Gustavo Giraldi Silva",
+            "cpf": "677.345.119-01",
+            "valor_debito": 2000.00,
+            "dias_atraso": 1089,
+            "produto": "Cartão Santander SS",
+            "desconto": 70
+        }
+    ]
+}

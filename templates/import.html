@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/import.css">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+
+    <div class="menu-bar">
+        <div class="menu-bar-content">
+            <div class="favicon-task">
+                <img src="/static/img/favicon.ico" alt="Task" />
+            </div>
+            <div class="menu-items">
+                <ul>
+                    <li>
+                        <a class="link-page" href="{{url_for('pages.index')}}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link-page" href="{{url_for('pages.imports')}}">
+                            Imports
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-imports">
+        <div class="table-content">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Índice</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Arquivo</th>
+                        <th scope="col">Download</th>
+                        <th scope="col">Contratos</th>
+                        <th scope="col">Sucessos</th>
+                        <th scope="col">Falhas</th>
+                        <th scope="col">Data do upload</th>
+
+                    </tr>
+                </thead>
+
+                {% for datas in range(data | length) %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{datas}}</th>
+                        <td>{{data[datas]['user']}}</td>
+                        <td>
+                            <a href="/static/uploads/{{data[datas]['file']}}" download>
+                                {{data[datas]['original_name']}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/static/downloads/{{data[datas]['links_file']}}" download>
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </td>
+                        <td>{{data[datas]['contracts_quantity'] + data[datas]['errors']['count']}}
+                        </td>
+                        <td>{{data[datas]['contracts_quantity']}}</td>
+                        <td>
+                            {{data[datas]['errors']['count']}}
+                            <a href="{{url_for('pages.errors_report')}}">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </a>
+                        </td>
+                        <td>{{data[datas]['created_at'] | pretty_date}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="form-group">
+            <form class="import-file-form" id="formImport" method="post" enctype="multipart/form-data">
+                <input class="fileName" type="file" name="fileName" id="fileName">
+                <button class="btn" id="btn-submit" type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

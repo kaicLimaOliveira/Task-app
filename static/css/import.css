@@ -1,0 +1,144 @@
+* {
+    margin: 0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.content {
+    margin: 0;
+    height: 120vh;
+    display: flex;
+}
+
+.content-imports {
+    height: 100vh;
+    width: 800px;
+    padding-top: 20px;
+    flex-grow: 2;
+    text-align: center;
+}
+
+.table-content {
+    height: 88vh;
+    overflow-y: scroll;
+}
+
+/* Ocultação da barra de rolagem */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table {
+    width: 90%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+i {
+    color: #121212;
+}
+
+i:hover {
+    opacity: 0.5;
+    transition: 0.2s;
+}
+
+a {
+    color: #121212;
+    text-decoration: none;
+}
+
+.btn {
+    margin: 15px 30px;
+}
+
+button:active {
+    transform: translateY(2px);
+    filter: brightness(0.9);
+}
+
+.fa-exclamation-circle {
+    color: #de0000;
+}
+
+.import-file-form {
+    height: 100px;
+}
+
+.fileName {
+    border: 2px dashed;
+    font-size: 14px;
+    font-family: "Courier New", Courier, monospace;
+    border-radius: 3px;
+    position: static;
+    padding: 2px;
+}
+
+.fileName:hover {
+    border: 2px dashed #2e979c;
+    color: #2e979c;
+}
+
+.col_spacing {
+    border: 0.5px solid #000;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* menu */
+.menu-bar {
+    background-color: #209cee;
+    flex-grow: 1;
+    height: 100%;
+}
+.menu-bar-content {
+    width: 100%;
+}
+
+.favicon-task {
+    padding: 15px;
+    border-bottom: 0.1px solid #cfcfcf;
+}
+
+.favicon-task img:hover {
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.menu-items ul {
+    padding: 0;
+}
+
+.menu-items li {
+    display: flex;
+    border-bottom: 0.1px solid #cfcfcf;
+    padding: 10px;
+}
+
+.menu-items li:hover {
+    background-color: #1878b8;
+    cursor: pointer;
+}
+
+.link-page {
+    font: 32px "Dongle";
+    width: 100%;
+}
+
+.link-page:hover {
+    opacity: 0.7;
+    transition: 0.3s;
+}
