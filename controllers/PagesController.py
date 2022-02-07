@@ -7,14 +7,14 @@ from datetime import datetime as date
 from flask import redirect, render_template, url_for
 from models import ContractsModel, ImportModel
 
-
 class Pages:
     def __init__(self):
         self.imports = ImportModel.Imports()
         self.contract = ContractsModel.Contracts()
-        self.status = ""
+        self.status_type = "Ativo"
         self.file_import = f'import_{uuid.uuid4()}.csv'
         self.file_link = f'links_{uuid.uuid4()}.csv'
+        
         self.key_access = None
         self.link_random = None
         self.link_user = {
@@ -22,9 +22,9 @@ class Pages:
             "link_random": [],
             "error_status": []
         }
+        
         self.count_error = 0  # contador de erros
         self.line_errors = {}
-
         self.errors = {
             "count": 0,
             "line_errors": {}
@@ -53,7 +53,6 @@ class Pages:
             count_line = 1  # em qual linha está
             count_contract_success = 0
             for index in table:
-                print(index)
                 count_error = 0
                 for x in range(1):
                     self.link_random = ''.join(random.choice(string.ascii_letters)for _ in range(10))
@@ -140,26 +139,65 @@ class Pages:
                     if count_error > 0:
                         self.link_user["error_status"].append('Sim')
                     else:
-                        data_contract = {
-                            "full_name": name,
-                            "access_key": self.key_access,
-                            "contract": contract,
-                            "entry_value": input_value,
-                            "entry_date": date_entries,
-                            "parcels_value": value_installment,
-                            "parcels_quantity": installment_amount,
-                            "parcels_day": installment,
-                            "expire_date": expire,
-                            "variables": {},
-                            "link": self.link_random,
-                            "status": self.status,
-                            "wallet": 5,
-                            "company_id": 1,
-                            "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
-                        }
+                        data_user = self.contract.find({})
+                        wallet = 5
+                        company_id = 1
+                        status = True
                         
+                        db_key_access = data_user[count_contract_success]['access_key']
+                        db_contract = data_user[count_contract_success]['contract']
+                        db_wallet = data_user[count_contract_success]['wallet']
+                        db_company_id = data_user[count_contract_success]['company_id']
+                        
+                        if db_key_access == self.key_access and db_contract == contract and db_wallet == wallet and db_company_id == company_id:
+                            status = False
+                            self.status_type = "Atualizado"
+                            for i in data_user:
+                                self.contract.update({'_id':i["_id"]}, {"status": status, "status_type": self.status_type})
+                                 
+                            data_contract = {
+                                "full_name": name,
+                                "access_key": self.key_access,
+                                "contract": contract,
+                                "entry_value": input_value,
+                                "entry_date": date_entries,
+                                "parcels_value": value_installment,
+                                "parcels_quantity": installment_amount,
+                                "parcels_day": installment,
+                                "expire_date": expire,
+                                "variables": {},
+                                "link": self.link_random,
+                                "status": True,
+                                "wallet": wallet,
+                                "company_id": company_id,
+                                "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
+                            }
+                            
+                            self.contract.create(data_contract)
+                            
+                            continue
+                        else:
+                            data_contract = {
+                                "full_name": name,
+                                "access_key": self.key_access,
+                                "contract": contract,
+                                "entry_value": input_value,
+                                "entry_date": date_entries,
+                                "parcels_value": value_installment,
+                                "parcels_quantity": installment_amount,
+                                "parcels_day": installment,
+                                "expire_date": expire,
+                                "variables": {},
+                                "link": self.link_random,
+                                "status": status,
+                                "wallet": wallet,
+                                "company_id": company_id,
+                                "status_type": self.status_type  # Tipos - ativo, atualizado e expirado
+                            }
+                    
+                            self.contract.create(data_contract)
+                            
                         self.link_user["error_status"].append('Não')
-                        self.contract.create(data_contract)
                         count_contract_success += 1
                         
                 except Exception as e:
@@ -178,7 +216,6 @@ class Pages:
                 "company_id": 1,
                 "contracts_quantity": count_contract_success,
                 "file": self.file_import,
-                "status": self.status,
                 "variables": []
             }
 
@@ -193,30 +230,29 @@ class Pages:
             data = self.imports.find({})
             return render_template('import.html', data=data)
         elif req.method == 'POST':
-            file_name = req.files['fileName']
+            try:
+                file_name = req.files['fileName']
 
-            file_name.save('static/uploads/' + self.file_import)  # Salvando um arquivo CSV
+                file_name.save('static/uploads/' + self.file_import)  # Salvando um arquivo CSV
 
-            t = threading.Thread(target=self.process, args=(file_name, ))  # Execução do Thread
-            t.start()
+                t = threading.Thread(target=self.process, args=(file_name, ))  # Execução do Thread
+                t.start()
 
-            while t.is_alive():
-                self.status = 'Processando'
-            self.status = 'Finalizado'
+                with open('static/downloads/' + self.file_link, 'w', newline='', encoding='utf-8') as new_file:  # Escrevendo um arquivo CSV manualmente
+                    writer_csv = csv.writer(new_file, delimiter=';')
 
-            with open('static/downloads/' + self.file_link, 'w', newline='', encoding='utf-8') as new_file:  # Escrevendo um arquivo CSV manualmente
-                writer_csv = csv.writer(new_file, delimiter=';')
+                    data_writer = [
+                        [f"{self.link_user['key_access'][0]}", f"{self.link_user['link_random'][0]}", f"{self.link_user['error_status'][0]}"],
+                        [f"{self.link_user['key_access'][1]}", f"{self.link_user['link_random'][1]}", f"{self.link_user['error_status'][1]}"],
+                        [f"{self.link_user['key_access'][2]}", f"{self.link_user['link_random'][2]}", f"{self.link_user['error_status'][2]}"],
+                        [f"{self.link_user['key_access'][3]}", f"{self.link_user['link_random'][3]}", f"{self.link_user['error_status'][3]}"],
+                        [f"{self.link_user['key_access'][4]}", f"{self.link_user['link_random'][4]}", f"{self.link_user['error_status'][4]}"],
+                        [f"{self.link_user['key_access'][5]}", f"{self.link_user['link_random'][5]}", f"{self.link_user['error_status'][5]}"]
+                    ]
 
-                data_writer = [
-                    [f"{self.link_user['key_access'][0]}", f"{self.link_user['link_random'][0]}", f"{self.link_user['error_status'][0]}"],
-                    [f"{self.link_user['key_access'][1]}", f"{self.link_user['link_random'][1]}", f"{self.link_user['error_status'][1]}"],
-                    [f"{self.link_user['key_access'][2]}", f"{self.link_user['link_random'][2]}", f"{self.link_user['error_status'][2]}"],
-                    [f"{self.link_user['key_access'][3]}", f"{self.link_user['link_random'][3]}", f"{self.link_user['error_status'][3]}"],
-                    [f"{self.link_user['key_access'][4]}", f"{self.link_user['link_random'][4]}", f"{self.link_user['error_status'][4]}"],
-                    [f"{self.link_user['key_access'][5]}", f"{self.link_user['link_random'][5]}", f"{self.link_user['error_status'][5]}"]
-                ]
-
-                writer_csv.writerows(data_writer)
+                    writer_csv.writerows(data_writer)
+            except Exception as e:
+                print(e)
 
         return redirect(url_for('pages.imports', filename=file_name))
 

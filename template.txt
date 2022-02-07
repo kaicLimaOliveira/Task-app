@@ -6,6 +6,13 @@ Olá #noME seja bem vindo! o que achou do seu #Produto? Viemos aqui lembrar do #
 
 #nome #Nome #NOMe #NOME #nome 
 
+/----------------------------------------------------------------------/
 access_key/link(contracts)/se deu erro ou não - 1 pra cada usuario
+objetivo - se o erro for igual a sim, não deixar que o usuario seja printado
 
+objetivo - se existir um usúario com a mesma chave de acesso, contrato, carteira 
+e company_id ele cria um novos contracts e os antigos ele muda o 
+status-type -atualizado e o status - false
+criar um novo
 
+se o company_id e o access_key forem iguais, reutilizar o mesmo (link) para o acesso
