@@ -12,10 +12,7 @@ def index():
 def imports():
     return Pages().new_imports(request)
 
-@pages.route('errors_report', methods=['GET'])
+@pages.route('import/errors_report', methods=['GET'])
 def errors_report():
     return Pages().errors_report(request)
 
-@pages.route('user/<link>', methods=['GET'])
-def user(link):
-    return Pages().user(request, link)

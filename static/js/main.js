@@ -90,17 +90,17 @@ $(document).ready(() => {
 
 
     $('#create-variable').click(() => {
-        const name_variable = $('#new-name-variable').val().toLowerCase()
-        const value_variable = $('#new-value-variable').val().toLowerCase()
+        const nameVariable = $('#new-name-variable').val().toLowerCase()
+        const valueVariable = $('#new-value-variable').val().toLowerCase()
 
-        if (!name_variable && !value_variable) {
+        if (!nameVariable && !valueVariable) {
             sweetAlert('warning', 'Oops...', 'Sua variável ou seu valor está vazio')
         }
         else {
-            if (!value_variable) {
+            if (!valueVariable) {
                 dados.clientes.forEach((users) => {
 
-                    users[name_variable] = 'valor indefinido'
+                    users[nameVariable] = 'valor indefinido'
                     sweetAlert('success', '', '')
 
                 })
@@ -113,13 +113,13 @@ $(document).ready(() => {
                 if (userSelect == 'none') {
                     dados.clientes.forEach((users) => {
 
-                        users[name_variable] = value_variable
+                        users[nameVariable] = valueVariable
                         sweetAlert('success', '', '')
 
                     })
                 }
 
-                valueSelect[name_variable] = value_variable
+                valueSelect[nameVariable] = valueVariable
                 sweetAlert('success', '', '')
             }
         }
