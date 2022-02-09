@@ -50,6 +50,15 @@ class Database:
             criteria["_id"] = ObjectId(criteria["_id"])
         element["updated_at"] = datetime.now()
         set_obj = {"$set": element}  # update value
+        updated = self.db[collection_name].update_many(criteria, set_obj)
+        if updated.matched_count == 1:
+            return "Record Successfully Updated"
+    
+    def update_one(self, criteria, element, collection_name):
+        if "_id" in criteria:
+            criteria["_id"] = ObjectId(criteria["_id"])
+        element["updated_at"] = datetime.now()
+        set_obj = {"$set": element}  # update value
         updated = self.db[collection_name].update_one(criteria, set_obj)
         if updated.matched_count == 1:
             return "Record Successfully Updated"

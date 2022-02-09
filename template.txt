@@ -16,3 +16,9 @@ status-type -atualizado e o status - false
 criar um novo
 
 se o company_id e o access_key forem iguais, reutilizar o mesmo (link) para o acesso
+
+
+se o status for false, não printa o contrato 
+
+fazer um texto modelo e renderizar na tela como variaveis na mesma 
+logica do primeiro exemplo com JS 

@@ -15,6 +15,8 @@ class Pages:
         self.file_import = f'import_{uuid.uuid4()}.csv'
         self.file_link = f'links_{uuid.uuid4()}.csv'
         
+        self.teste = 0
+        
         self.key_access = None
         self.link_random = None
         self.link_user = {
@@ -45,47 +47,11 @@ class Pages:
 
                 t = threading.Thread(target=self.process, args=(file_name, ))  # Execução do Thread
                 t.start()
-
-                with open('static/downloads/' + self.file_link, 'w', newline='', encoding='utf-8') as new_file:  # Escrevendo um arquivo CSV manualmente
-                    writer_csv = csv.writer(new_file, delimiter=';')
-                    data_writer = [
-                        [
-                            f"{self.link_user['key_access'][0]}", 
-                            f"{self.link_user['link_random'][0]}", 
-                            f"{self.link_user['error_status'][0]}"
-                        ],
-                        [
-                            f"{self.link_user['key_access'][1]}", 
-                            f"{self.link_user['link_random'][1]}", 
-                            f"{self.link_user['error_status'][1]}"
-                        ],
-                        [
-                            f"{self.link_user['key_access'][2]}", 
-                            f"{self.link_user['link_random'][2]}", 
-                            f"{self.link_user['error_status'][2]}"
-                        ],
-                        [
-                            f"{self.link_user['key_access'][3]}", 
-                            f"{self.link_user['link_random'][3]}", 
-                            f"{self.link_user['error_status'][3]}"
-                        ],
-                        [
-                            f"{self.link_user['key_access'][4]}", 
-                            f"{self.link_user['link_random'][4]}", 
-                            f"{self.link_user['error_status'][4]}"
-                            ],
-                        [
-                            f"{self.link_user['key_access'][5]}", 
-                            f"{self.link_user['link_random'][5]}", 
-                            f"{self.link_user['error_status'][5]}"
-                        ]
-                    ]
-
-                    writer_csv.writerows(data_writer)
+                
             except Exception as e:
                 print(e)
 
-        return redirect(url_for('pages.imports', filename=file_name))
+        return redirect(url_for('pages.imports', filename=file_name)) 
 
     def errors_report(self, req):
         # errors = self.imports.find({['errors']}[0])
@@ -112,6 +78,7 @@ class Pages:
 
             count_line = 1  # em qual linha está
             count_contract_success = 0
+            contador = 0
             for index in table:
                 count_error = 0
                 for x in range(1):
@@ -199,74 +166,68 @@ class Pages:
                     if count_error > 0:
                         self.link_user["error_status"].append('Sim')
                     else:
-                        try: 
-                            wallet = 5
-                            company_id = 1
-                            user_access_control = self.contract.find({'company_id':company_id, 'access_key': self.key_access})   
-                                           
-                            if len(user_access_control) > 0:
-                                self.contract.update(
-                                    {'access_key': self.key_access, 'contract': contract, 'wallet': wallet, 'company_id': company_id}, 
-                                    {"status": False, "status_type": "Atualizado"}
-                                )
-                                
-                                print(user_access_control[-1]['access_key'], 'bd')
-                                print(self.key_access, 'scope')
-                                
-                                link_user_old = user_access_control[-1]['link']
-                                print(link_user_old)
-                                    
-                                data_contract = {
-                                    "full_name": name,
-                                    "access_key": self.key_access,
-                                    "contract": contract,
-                                    "entry_value": input_value,
-                                    "entry_date": date_entries,
-                                    "parcels_value": value_installment,
-                                    "parcels_quantity": installment_amount,
-                                    "parcels_day": installment,
-                                    "expire_date": expire,
-                                    "variables": {},
-                                    "link": link_user_old,
-                                    "status": True,
-                                    "wallet": wallet,
-                                    "company_id": company_id,
-                                    "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
-                                }
-                                
-                                self.contract.create(data_contract)
-                            else:         
-                                data_contract = {
-                                    "full_name": name,
-                                    "access_key": self.key_access,
-                                    "contract": contract,
-                                    "entry_value": input_value,
-                                    "entry_date": date_entries,
-                                    "parcels_value": value_installment,
-                                    "parcels_quantity": installment_amount,
-                                    "parcels_day": installment,
-                                    "expire_date": expire,
-                                    "variables": {},
-                                    "link": self.link_random,
-                                    "status": True,
-                                    "wallet": wallet,
-                                    "company_id": company_id,
-                                    "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
-                                }
-                                
-                                self.contract.create(data_contract)
-                            self.link_user["error_status"].append('Não')
-                            count_contract_success += 1
+                        wallet = 5
+                        company_id = 1
+                        user_access_control = self.contract.find({'company_id':company_id, 'access_key': self.key_access})   
+                                        
+                        if len(user_access_control) > 0:
+                            self.contract.update(
+                                {'access_key': self.key_access, 'contract': contract, 'wallet': wallet, 'company_id': company_id}, 
+                                {"status": False, "status_type": "Atualizado"}
+                            )
                             
-                        except Exception as e:
-                            print(e) 
-                               
+                            link_user_old = user_access_control[-1]['link']
+                                
+                            data_contract = {
+                                "full_name": name,
+                                "access_key": self.key_access,
+                                "contract": contract,
+                                "entry_value": input_value,
+                                "entry_date": date_entries,
+                                "parcels_value": value_installment,
+                                "parcels_quantity": installment_amount,
+                                "parcels_day": installment,
+                                "expire_date": expire,
+                                "variables": {},
+                                "link": link_user_old,
+                                "status": True,
+                                "wallet": wallet,
+                                "company_id": company_id,
+                                "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
+                            }
+                            
+                            self.contract.create(data_contract)
+                        else:         
+                            data_contract = {
+                                "full_name": name,
+                                "access_key": self.key_access,
+                                "contract": contract,
+                                "entry_value": input_value,
+                                "entry_date": date_entries,
+                                "parcels_value": value_installment,
+                                "parcels_quantity": installment_amount,
+                                "parcels_day": installment,
+                                "expire_date": expire,
+                                "variables": {},
+                                "link": self.link_random,
+                                "status": True,
+                                "wallet": wallet,
+                                "company_id": company_id,
+                                "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
+                            }
+                            
+                            self.contract.create(data_contract)
+                        self.link_user["error_status"].append('Não')
+                        count_contract_success += 1
+
+                    self.link_user["key_access"].append(self.key_access)
+                    self.writer_csv_file(contador, count_line)
+                    
                 except Exception as e:
                     print(e)
                 
                 count_line += 1
-                self.link_user["key_access"].append(self.key_access)
-                
+
             data_import = {
                 "user": "Kaic de Lima Oliveira",
                 "errors": self.errors,
@@ -281,3 +242,24 @@ class Pages:
             }
 
             self.imports.create(data_import)
+    
+    def writer_csv_file(self, contador, count):
+        header_list = ['chave_de_acesso', 'link_do_usuario', 'erro']
+        with open('static/downloads/' + self.file_link, 'w', newline='', encoding='utf-8') as new_file:  # Escrevendo um arquivo CSV manualmente
+            writer_csv = csv.writer(new_file, delimiter=';')
+            
+            for i in range(count):
+                data_writer = [
+                    ['chave_de_acesso', 'link_do_usuario', 'erro'],
+                    [
+                        f"{self.link_user['key_access'][contador]}", 
+                        f"{self.link_user['link_random'][contador]}", 
+                        f"{self.link_user['error_status'][contador]}"    
+                    ] 
+                ]
+                
+                # d = csv.DictWriter(new_file, delimiter=';', fieldnames=header_list)
+                # d.writeheader()
+                
+                contador += 1
+                writer_csv.writerows(data_writer)

@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for
+from flask import jsonify, redirect, render_template, url_for
 from models import ContractsModel
 
 class User:
@@ -6,5 +6,10 @@ class User:
         self.contract  = ContractsModel.Contracts()
         
     def index(self, req, link):
-        user = self.contract.find({'link':link})
-        return render_template('user.html', users=user)
+        return render_template('user.html', link_user=link)
+    
+    def code(self, req, code):
+        user = self.contract.find({'link':code, 'status': True})
+        user_json = jsonify(user)
+        return user_json
+        

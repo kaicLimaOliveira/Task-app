@@ -7,3 +7,7 @@ user = Blueprint('user', __name__, template_folder='templates', url_prefix='/use
 def index(link):
     return User().index(request, link)
 
+@user.route('/code/<code>', methods=['GET'])
+def code(code):
+    return User().code(request, code)
+
