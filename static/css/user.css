@@ -1,0 +1,10 @@
+.content{
+    height: 10vh;
+}
+
+.card-user {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+}

@@ -2,26 +2,27 @@
 
 {% block head %}
 <script src="/static/js/user.js"></script>
+<link rel="stylesheet" href="/static/css/user.css">
 {% endblock %}
 
 {% block content %}
-<div>
+<div class="content">
+    <div class="card-user">
+        <div id="text-user">
     
-
-    <div id="text-user">
+        </div>
+        
+        <button id="button">
+            Enviar
+        </button>
+        
+        <button id="btn-reset" type="reset">
+            Limpar
+        </button>
 
     </div>
-    
 
-    
     <input id="codeUser" type="hidden" value="{{link_user}}" name="">
-    <button id="button">
-        Enviar
-    </button>
-
-    <button id="btn-reset" type="reset">
-        Limpar
-    </button>
 </div>
 
 {% endblock %}
