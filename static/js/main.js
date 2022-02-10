@@ -88,7 +88,6 @@ $(document).ready(() => {
         $('#aside-text').empty()
     })
 
-
     $('#create-variable').click(() => {
         const nameVariable = $('#new-name-variable').val().toLowerCase()
         const valueVariable = $('#new-value-variable').val().toLowerCase()
@@ -146,18 +145,4 @@ $(document).ready(() => {
             text: text
         })
     }
-
 })
-
-// var original_text = terms_txt
-// var modified_text = terms_txt.toLowerCase()
-
-// for (var variable in terms_variables[contract_id]) {
-//     while (modified_text.includes("#" + variable.toString())) {
-//         var idx = modified_text.indexOf("#" + variable.toString())
-//         var fragment = original_text.slice(idx, idx + (variable.toString().length + 1))
-//         original_text = original_text.replace(fragment, terms_variables[contract_id][variable])
-//         modified_text = modified_text.replace("#" + variable.toString(), terms_variables[contract_id][variable])
-//     }
-
-// }

@@ -19,6 +19,9 @@ class Imports:
     def update(self, _id, data):
         # self.validator.validate(data, self.fields, self.update_required_fields, self.update_optional_fields)
         return self.db.update(_id, data, self.collection_name)
+    
+    def update_one(self, _id, data):
+        return self.db.update_one(_id, data, self.collection_name)
 
     def upsert(self, _id, user):
         return self.db.upsert(_id, user, self.collection_name)

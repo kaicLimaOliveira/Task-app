@@ -22,6 +22,8 @@
 ## 💻 Projeto
 
 Em desenvolvimento.
+O projeto consiste no aprendizado mais profundo na logica
+em Flask, Python e JavaScript
 
 
 ## ✨ Tecnologias utilizadas

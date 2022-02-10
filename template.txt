@@ -7,18 +7,8 @@ Olá #noME seja bem vindo! o que achou do seu #Produto? Viemos aqui lembrar do #
 #nome #Nome #NOMe #NOME #nome 
 
 /----------------------------------------------------------------------/
-access_key/link(contracts)/se deu erro ou não - 1 pra cada usuario
-objetivo - se o erro for igual a sim, não deixar que o usuario seja printado
 
-objetivo - se existir um usúario com a mesma chave de acesso, contrato, carteira 
-e company_id ele cria um novos contracts e os antigos ele muda o 
-status-type -atualizado e o status - false
-criar um novo
-
-se o company_id e o access_key forem iguais, reutilizar o mesmo (link) para o acesso
-
-
-se o status for false, não printa o contrato 
-
-fazer um texto modelo e renderizar na tela como variaveis na mesma 
-logica do primeiro exemplo com JS 
+descobrir como pegar as colunas que são variaveis da importação do arquivo csv
+imports - array - indice/nome da coluna
+contracts - obj - adicionar chave/valor
+trazer as variaveis do obj para o escopo de todas as outras 
