@@ -4,7 +4,7 @@ from factory.database import Database
 class Contracts:
     def __init__(self):
         self.db = Database()
-        self.collection_name = 'contracts'
+        self.collection_name = 'Contracts'
 
     def create(self, data):
         res = self.db.insert(data, self.collection_name)
