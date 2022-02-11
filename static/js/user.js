@@ -17,8 +17,8 @@ $(document).ready(() => {
 
         res.forEach((users) => {
             let textOriginal = `
-            Olá #full_name seja bem vindo! <br />
-            Sua chave de acesso #access_key <br />
+            Olá #full_name seja bem vindo! <br /> <br />
+            Sua chave de acesso #access_key <br /> 
             Acesse seu contrato #contract! <br />
             O valor de entrada foi de #entry_value <br />
             em apenas #parcels_quantity parcelas de <br />

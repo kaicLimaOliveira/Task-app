@@ -2,7 +2,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    background-color: #0f0f0f;
+    background: rgb(18, 18, 20);
 }
 
 .card-user {
@@ -20,16 +20,18 @@
 
 #text-user {
     color: white;
-    background-color: #121212;
+    background: rgb(32, 32, 36);
     padding: 100px;
     border-radius: 12px;
     font-size: 20px;
     font-family: monospace;
-    line-height: 1.3;
+    line-height: 1.5;
     height: 220px;
     width: 400px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn {

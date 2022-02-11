@@ -21,9 +21,7 @@
 
 ## 💻 Projeto
 
-Em desenvolvimento.
-O projeto consiste no aprendizado mais profundo na logica
-em Flask, Python e JavaScript
+O projeto consiste no aprendizado mais profundo na logica em Flask, Python e JavaScript. Utiliza de conhecimentos como a leitura, escrita, importação de arquivos CSV, bem como a criação de informações no banco de dados com os arquivos CSV, criação de uuid, criação de strings randômicas, códigos em formato OO, criação e manipulação das informações do banco de dados e requisições assíncronas ao back-end.
 
 
 ## ✨ Tecnologias utilizadas

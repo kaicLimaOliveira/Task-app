@@ -210,9 +210,8 @@ class Pages:
             self.create_imports_bd(file_name, count_contract_success)
             
     def new_variables(self, row, indice):
-        print(indice)   
         if not row[indice]:
-            print('caiu aqui')
+            pass
         else:
             try:
                 self.variables['teste'] = row[indice]
