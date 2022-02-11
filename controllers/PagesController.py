@@ -16,6 +16,8 @@ class Pages:
         self.file_import = f'import_{uuid.uuid4()}.csv'
         self.file_link = f'links_{uuid.uuid4()}.csv'
         
+        self.key = None
+        self.value = None
         self.link_random = None
         self.link_user = {
             "key_access": [],
@@ -48,7 +50,7 @@ class Pages:
                 t.start()
                 
             except Exception as e:
-                print(e)
+                pass
 
         return redirect(url_for('pages.imports', filename=file_name)) 
 
@@ -59,16 +61,17 @@ class Pages:
     def process(self, file_name):
         with open('static/uploads/' + file_name.filename, 'r', encoding='utf-8') as read_file_CSV:
 
-            next(read_file_CSV)
+            # next(read_file_CSV)
             table = csv.reader(read_file_CSV, delimiter=';')
 
             count_line = 1  # em qual linha está
             count_contract_success = 0
             index_count = 0
-            indice = 9 
+            index_key = 9 
+            index_value = 9
             
             for row in table:
-                self.new_variables(row, indice)
+                self.new_variables(row, index_key, count_line, index_value)
                 count_error = 0
                 self.generate_link_random()
                 try:
@@ -169,26 +172,17 @@ class Pages:
                             )
                             
                             link_user_old = user_access_control[-1]['link']
-                                
-                            data_contract = {
-                                "full_name": name,
-                                "access_key": key_access,
-                                "contract": contract,
-                                "entry_value": input_value,
-                                "entry_date": date_entries,
-                                "parcels_value": value_installment,
-                                "parcels_quantity": installment_amount,
-                                "parcels_day": installment,
-                                "expire_date": expire,
-                                "variables": self.variables,
-                                "link": link_user_old,
-                                "status": True,
-                                "wallet": wallet,
-                                "company_id": company_id,
-                                "status_type": "Ativo"  # Tipos - ativo, atualizado e expirado
-                            }
+                            self.create_contracts_bd(
+                                name, key_access, contract, input_value, 
+                                date_entries, value_installment,installment_amount, 
+                                installment, expire, wallet, company_id
+                            )
                             
-                            self.contract.create(data_contract)
+                            self.contract.update(
+                                {'link':self.link_random},
+                                {'link': link_user_old}
+                            )
+                            
                         else:         
                             self.create_contracts_bd(
                                 name, key_access, contract, input_value, 
@@ -203,25 +197,38 @@ class Pages:
                     self.writer_csv_file(index_count, count_line)
                     
                 except Exception as e:
-                    print(e)
+                    pass
                 
                 count_line += 1
 
             self.create_imports_bd(file_name, count_contract_success)
             
-    def new_variables(self, row, indice):
-        if not row[indice]:
-            pass
-        else:
-            try:
-                self.variables['teste'] = row[indice]
-                print(self.variables, 'variables')
-                print(row[indice], 'row/indice')
-                
-            except Exception as e:
-                print(e)
-        indice += 1
-                
+    def new_variables(self, row, index_key, count_line, index_value):
+        for i in range(len(row)):
+            if count_line == 1: 
+                if len(row) < 8:
+                    pass
+                else:
+                    try:
+                        self.key = row[index_key]
+                        self.variables[self.key] = ''
+                        index_key += 1
+            
+                    except Exception as e:
+                        pass
+                                    
+            elif count_line >= 2:
+                if len(row) < 8:
+                    pass
+                else:
+                    try:
+                        self.variables[self.key] = row[index_value]
+                        print(self.variables, 'variables')
+                        index_value += 1
+
+                    except Exception as e:
+                        pass
+                         
     def monetary_format(self, input_value):
         if "." in input_value:
             input_value = input_value.replace('.', '')      

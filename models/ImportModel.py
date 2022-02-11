@@ -4,7 +4,7 @@ from factory.database import Database
 class Imports:
     def __init__(self):
         self.db = Database()
-        self.collection_name = 'Imports'
+        self.collection_name = 'imports'
 
     def create(self, data):
         res = self.db.insert(data, self.collection_name)
@@ -16,7 +16,7 @@ class Imports:
     def find_by_id(self, _id):
         return self.db.find_by_id(_id, self.collection_name)
 
-    def update(self, _id, data):
+    def update(self, _id, data):  # update all
         # self.validator.validate(data, self.fields, self.update_required_fields, self.update_optional_fields)
         return self.db.update(_id, data, self.collection_name)
     
