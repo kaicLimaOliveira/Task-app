@@ -16,8 +16,8 @@ class Pages:
         self.file_import = f'import_{uuid.uuid4()}.csv'
         self.file_link = f'links_{uuid.uuid4()}.csv'
         
-        self.key = None
-        self.value = None
+        self.key = []
+
         self.link_random = None
         self.link_user = {
             "key_access": [],
@@ -50,7 +50,7 @@ class Pages:
                 t.start()
                 
             except Exception as e:
-                pass
+                print(e)
 
         return redirect(url_for('pages.imports', filename=file_name)) 
 
@@ -197,37 +197,44 @@ class Pages:
                     self.writer_csv_file(index_count, count_line)
                     
                 except Exception as e:
-                    pass
+                    print(e)
                 
                 count_line += 1
 
             self.create_imports_bd(file_name, count_contract_success)
             
     def new_variables(self, row, index_key, count_line, index_value):
+        counter_key_index = 0
         for i in range(len(row)):
             if count_line == 1: 
                 if len(row) < 8:
-                    pass
+                    continue
                 else:
                     try:
-                        self.key = row[index_key]
+                        self.key.append(row[9])
+                        self.key.append(row[10])
+                        self.key.append(row[11])
+                        self.key.append(row[12])
+                        self.key.append(row[13])
+                        
                         self.variables[self.key] = ''
                         index_key += 1
+                        print(self.key)
             
                     except Exception as e:
-                        pass
-                                    
-            elif count_line >= 2:
-                if len(row) < 8:
-                    pass
+                        print(e)
+      
+            if count_line >= 2:           
+                if not len(row):
+                    continue
                 else:
                     try:
-                        self.variables[self.key] = row[index_value]
-                        print(self.variables, 'variables')
+                        self.variables[self.key[counter_key_index]] = row[index_value]
                         index_value += 1
-
+                        counter_key_index += 1
+                    
                     except Exception as e:
-                        pass
+                        print(e)
                          
     def monetary_format(self, input_value):
         if "." in input_value:
