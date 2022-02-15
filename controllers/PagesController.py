@@ -85,62 +85,55 @@ class Pages:
                     
                     if not name:  
                         count_error += 1
-                        if row[0] == '':
-                            self.line_errors[f'{count_line}-1'] = 'coluna nome vazia'
+                        self.line_errors[f'{count_line}-1'] = 'coluna nome vazia'
 
                     if not key_access:  
                         count_error += 1
-                        if row[1] == '':
-                            self.line_errors[f'{count_line}-2'] = 'coluna chave de acesso vazia'
+                        self.line_errors[f'{count_line}-2'] = 'coluna chave de acesso vazia'
 
                     if not contract:  
                         count_error += 1
-                        if row[2] == '':
-                            self.line_errors[f'{count_line}-3'] = 'coluna contrato vazia'
+                        self.line_errors[f'{count_line}-3'] = 'coluna contrato vazia'
 
                     if not input_value:  
                         count_error += 1
-                        if row[3] == '':
-                            self.line_errors[f'{count_line}-4'] = 'coluna valor de entrada vazia'
+                        self.line_errors[f'{count_line}-4'] = 'coluna valor de entrada vazia'
                     else:
                         self.monetary_format(input_value)
 
                     if not date_entries:  
                         count_error += 1
-                        if row[4] == '':
-                            self.line_errors[f'{count_line}-5'] = 'coluna data de entrada vazia'
+                        self.line_errors[f'{count_line}-5'] = 'coluna data de entrada vazia'
                     else:
                         date_entries = date_entries.split('/')
                         for data in range(len(date_entries)):
+                            print(data, 'data')
+                            print(len(date_entries), 'len date')
                             date_entries[data] = int(date_entries[data])
 
                         date_entries = date(date_entries[2], date_entries[1], date_entries[0]).strftime('%d/%m/%Y')
 
                     if not installment_amount:  
                         count_error += 1
-                        if row[5] == '':
-                            self.line_errors[f'{count_line}-6'] = 'coluna quantidade de parcelas vazia'
+                        self.line_errors[f'{count_line}-6'] = 'coluna quantidade de parcelas vazia'
                     else:
                         installment_amount = int(installment_amount)
 
                     if not installment:  
                         count_error += 1
-                        if row[6] == '':
-                            self.line_errors[f'{count_line}-7'] = 'coluna vencimentos das parcelas vazia'
+                        self.line_errors[f'{count_line}-7'] = 'coluna vencimentos das parcelas vazia'
                     else:
                         installment = int(installment)
 
                     if not value_installment:  
                         count_error += 1
-                        if row[7] == '':
-                            self.line_errors[f'{count_line}-8'] = 'coluna valor das parcelas vazia'
+                        self.line_errors[f'{count_line}-8'] = 'coluna valor das parcelas vazia'
                     else:
                         value_installment = int(value_installment)
 
                     if not expire:  
                         count_error += 1
-                        if row[8] == '':
-                            self.line_errors[f'{count_line}-9'] = 'coluna expiração das parcelas vazia'
+                        self.line_errors[f'{count_line}-9'] = 'coluna expiração das parcelas vazia'
                     else:
                         expire = expire.split('/')
                         for data in range(len(expire)):
