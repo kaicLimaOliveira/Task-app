@@ -67,11 +67,9 @@ class Pages:
             count_line = 1  # em qual linha está
             count_contract_success = 0
             index_count = 0
-            index_key = 9 
-            index_value = 9
             
             for row in table:
-                self.new_variables(row, index_key, count_line, index_value)
+                self.new_variables(row, count_line)
                 count_error = 0
                 self.generate_link_random()
                 try:
@@ -203,38 +201,36 @@ class Pages:
 
             self.create_imports_bd(file_name, count_contract_success)
             
-    def new_variables(self, row, index_key, count_line, index_value):
-        counter_key_index = 0
-        for i in range(len(row)):
-            if count_line == 1: 
-                if len(row) < 8:
-                    continue
-                else:
-                    try:
-                        self.key.append(row[9])
-                        self.key.append(row[10])
-                        self.key.append(row[11])
-                        self.key.append(row[12])
-                        self.key.append(row[13])
-                        
-                        self.variables[self.key] = ''
+    def new_variables(self, row, count_line):
+        index_value = 9
+        index_key = 9 
+        
+        if count_line == 1: 
+            if len(row) < 8:
+                pass
+            else:
+                try:
+                    while row[index_key]:
+                        self.key.append(row[index_key])
+                        self.variables[row[index_key]] = ''
                         index_key += 1
-                        print(self.key)
-            
-                    except Exception as e:
-                        print(e)
-      
-            if count_line >= 2:           
-                if not len(row):
-                    continue
-                else:
-                    try:
-                        self.variables[self.key[counter_key_index]] = row[index_value]
+
+                        #fazer replace no padrão das Variaveis
+        
+                except Exception as e:
+                    print(e)
+
+        elif count_line >= 2:           
+            if len(row) < 8:
+                pass
+            else:
+                try:
+                    for i in self.key:
+                        self.variables[i] = row[index_value]
                         index_value += 1
-                        counter_key_index += 1
-                    
-                    except Exception as e:
-                        print(e)
+                
+                except Exception as e:
+                    print(e)
                          
     def monetary_format(self, input_value):
         if "." in input_value:
