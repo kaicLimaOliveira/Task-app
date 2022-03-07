@@ -16,6 +16,11 @@ $(document).ready(() => {
         console.log(res)
 
         res.forEach((users) => {
+            const variables = users['variables']
+            users = {...users, ...variables}
+            delete users['variables']
+            console.log(users);
+            
             let textOriginal = `
             Olá #full_name seja bem vindo! <br /> <br />
             Sua chave de acesso #access_key <br /> 
@@ -24,7 +29,12 @@ $(document).ready(() => {
             em apenas #parcels_quantity parcelas de <br />
             #parcels_value reais por mês <br />
             Data de expiração: #expire_date <br />
+            seu cartão de número #cartao está disponível <br />
+            para a comprar do produto #produto, #boleto aceitamos
+            boleto <br />
+            Telefone do #full_name - #telefone <br />
             `
+
             let textTest = `
             Olá #fuLL_name seja bem vindo! <br />
             Sua chave de acesso #ACCESS_KEY <br />

@@ -67,11 +67,9 @@ class Pages:
             count_line = 1  # em qual linha está
             count_contract_success = 0
             index_count = 0
-            index_key = 9 
-            index_value = 9
             
             for row in table:
-                self.new_variables(row, index_key, count_line, index_value)
+                self.new_variables(row, count_line)
                 count_error = 0
                 self.generate_link_random()
                 try:
@@ -87,62 +85,55 @@ class Pages:
                     
                     if not name:  
                         count_error += 1
-                        if row[0] == '':
-                            self.line_errors[f'{count_line}-1'] = 'coluna nome vazia'
+                        self.line_errors[f'{count_line}-1'] = 'coluna nome vazia'
 
                     if not key_access:  
                         count_error += 1
-                        if row[1] == '':
-                            self.line_errors[f'{count_line}-2'] = 'coluna chave de acesso vazia'
+                        self.line_errors[f'{count_line}-2'] = 'coluna chave de acesso vazia'
 
                     if not contract:  
                         count_error += 1
-                        if row[2] == '':
-                            self.line_errors[f'{count_line}-3'] = 'coluna contrato vazia'
+                        self.line_errors[f'{count_line}-3'] = 'coluna contrato vazia'
 
                     if not input_value:  
                         count_error += 1
-                        if row[3] == '':
-                            self.line_errors[f'{count_line}-4'] = 'coluna valor de entrada vazia'
+                        self.line_errors[f'{count_line}-4'] = 'coluna valor de entrada vazia'
                     else:
                         self.monetary_format(input_value)
 
                     if not date_entries:  
                         count_error += 1
-                        if row[4] == '':
-                            self.line_errors[f'{count_line}-5'] = 'coluna data de entrada vazia'
+                        self.line_errors[f'{count_line}-5'] = 'coluna data de entrada vazia'
                     else:
                         date_entries = date_entries.split('/')
                         for data in range(len(date_entries)):
+                            print(data, 'data')
+                            print(len(date_entries), 'len date')
                             date_entries[data] = int(date_entries[data])
 
                         date_entries = date(date_entries[2], date_entries[1], date_entries[0]).strftime('%d/%m/%Y')
 
                     if not installment_amount:  
                         count_error += 1
-                        if row[5] == '':
-                            self.line_errors[f'{count_line}-6'] = 'coluna quantidade de parcelas vazia'
+                        self.line_errors[f'{count_line}-6'] = 'coluna quantidade de parcelas vazia'
                     else:
                         installment_amount = int(installment_amount)
 
                     if not installment:  
                         count_error += 1
-                        if row[6] == '':
-                            self.line_errors[f'{count_line}-7'] = 'coluna vencimentos das parcelas vazia'
+                        self.line_errors[f'{count_line}-7'] = 'coluna vencimentos das parcelas vazia'
                     else:
                         installment = int(installment)
 
                     if not value_installment:  
                         count_error += 1
-                        if row[7] == '':
-                            self.line_errors[f'{count_line}-8'] = 'coluna valor das parcelas vazia'
+                        self.line_errors[f'{count_line}-8'] = 'coluna valor das parcelas vazia'
                     else:
                         value_installment = int(value_installment)
 
                     if not expire:  
                         count_error += 1
-                        if row[8] == '':
-                            self.line_errors[f'{count_line}-9'] = 'coluna expiração das parcelas vazia'
+                        self.line_errors[f'{count_line}-9'] = 'coluna expiração das parcelas vazia'
                     else:
                         expire = expire.split('/')
                         for data in range(len(expire)):
@@ -203,38 +194,36 @@ class Pages:
 
             self.create_imports_bd(file_name, count_contract_success)
             
-    def new_variables(self, row, index_key, count_line, index_value):
-        counter_key_index = 0
-        for i in range(len(row)):
-            if count_line == 1: 
-                if len(row) < 8:
-                    continue
-                else:
-                    try:
-                        self.key.append(row[9])
-                        self.key.append(row[10])
-                        self.key.append(row[11])
-                        self.key.append(row[12])
-                        self.key.append(row[13])
-                        
-                        self.variables[self.key] = ''
+    def new_variables(self, row, count_line):
+        index_value = 9
+        index_key = 9 
+        
+        if count_line == 1: 
+            if len(row) < 8:
+                pass
+            else:
+                try:
+                    while row[index_key]:
+                        self.key.append(row[index_key])
+                        self.variables[row[index_key]] = ''
                         index_key += 1
-                        print(self.key)
-            
-                    except Exception as e:
-                        print(e)
-      
-            if count_line >= 2:           
-                if not len(row):
-                    continue
-                else:
-                    try:
-                        self.variables[self.key[counter_key_index]] = row[index_value]
+
+                        #fazer replace no padrão das Variaveis
+        
+                except Exception as e:
+                    print(e)
+
+        elif count_line >= 2:           
+            if len(row) < 8:
+                pass
+            else:
+                try:
+                    for i in self.key:
+                        self.variables[i] = row[index_value]
                         index_value += 1
-                        counter_key_index += 1
-                    
-                    except Exception as e:
-                        print(e)
+                
+                except Exception as e:
+                    print(e)
                          
     def monetary_format(self, input_value):
         if "." in input_value:
